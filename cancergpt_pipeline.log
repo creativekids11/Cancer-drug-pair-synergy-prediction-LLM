@@ -54,3 +54,76 @@
 2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Concurrency: 10 parallel requests
 2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Timeout: 60s per request
 2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     | Starting data fetch from DrugCombDB (this may take several minutes)...
+2025-12-19 12:52:55,778 | pipeline_orchestrator | WARNING  | [WARN] No data retrieved from API!
+2025-12-19 12:52:55,779 | pipeline_orchestrator | WARNING  |   - Endpoint: http://drugcombdb.denglab.org:8888/integration/list
+2025-12-19 12:52:55,779 | pipeline_orchestrator | WARNING  |   - The API may be temporarily unavailable
+2025-12-19 12:52:55,779 | pipeline_orchestrator | WARNING  |   - Or all requested pages returned empty results
+2025-12-19 12:52:55,779 | pipeline_orchestrator | WARNING  |   - Falling back to synthetic data generation...
+2025-12-19 12:52:55,779 | pipeline_orchestrator | WARNING  | 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2025-12-19 12:52:55,780 | pipeline_orchestrator | WARNING  | NOTE: DrugCombDB API returned no data
+2025-12-19 12:52:55,780 | pipeline_orchestrator | WARNING  | Continuing with synthetic data generation instead
+2025-12-19 12:52:55,780 | pipeline_orchestrator | WARNING  | !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2025-12-19 12:52:55,780 | pipeline_orchestrator | INFO     | 
+2025-12-19 12:52:55,781 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:52:55,781 | pipeline_orchestrator | INFO     | STEP 2: PREPARING AND SPLITTING DATA
+2025-12-19 12:52:55,781 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:52:57,122 | pipeline_orchestrator | INFO     | Loading data from sample_data.csv...
+2025-12-19 12:52:57,131 | pipeline_orchestrator | INFO     | [OK] Loaded 1000 samples
+2025-12-19 12:52:57,131 | pipeline_orchestrator | INFO     | Validating data format...
+2025-12-19 12:52:57,132 | data_prep | INFO     | Data validation passed
+2025-12-19 12:52:57,132 | pipeline_orchestrator | INFO     | [OK] Data validation passed
+2025-12-19 12:52:57,134 | pipeline_orchestrator | INFO     | Cleaning data (removing duplicates, handling missing values)...
+2025-12-19 12:52:57,140 | data_prep | INFO     | Removed 0 duplicates
+2025-12-19 12:52:57,147 | data_prep | INFO     | Removed 0 rows with missing critical values
+2025-12-19 12:52:57,156 | data_prep | INFO     | Data cleaning complete: 1000 rows remaining
+2025-12-19 12:52:57,156 | pipeline_orchestrator | INFO     | [OK] Removed 0 duplicate/invalid rows, 1000 remain
+2025-12-19 12:52:57,157 | pipeline_orchestrator | INFO     | Splitting by tissue (stratified train/val/test)...
+2025-12-19 12:52:57,256 | data_prep | INFO     | 
+Data split (tissue-aware):
+2025-12-19 12:52:57,257 | data_prep | INFO     |   Train: 686 (68.6%)
+2025-12-19 12:52:57,258 | data_prep | INFO     |   Val:   105 (10.5%)
+2025-12-19 12:52:57,258 | data_prep | INFO     |   Test:  209 (20.9%)
+2025-12-19 12:52:57,260 | pipeline_orchestrator | INFO     | [OK] Split complete:
+2025-12-19 12:52:57,260 | pipeline_orchestrator | INFO     |   - Train: 686 samples
+2025-12-19 12:52:57,260 | pipeline_orchestrator | INFO     |   - Val: 105 samples
+2025-12-19 12:52:57,260 | pipeline_orchestrator | INFO     |   - Test: 209 samples
+2025-12-19 12:52:57,262 | pipeline_orchestrator | INFO     | Balancing classes in training data...
+2025-12-19 12:52:57,266 | data_prep | INFO     | 
+Class balancing:
+2025-12-19 12:52:57,267 | data_prep | INFO     |   Before: 599 vs 87
+2025-12-19 12:52:57,267 | data_prep | INFO     |   After: 87 vs 87
+2025-12-19 12:52:57,268 | pipeline_orchestrator | INFO     | [OK] Training data balanced:
+2025-12-19 12:52:57,268 | pipeline_orchestrator | INFO     |   - Before: {0: 599, 1: 87}
+2025-12-19 12:52:57,271 | pipeline_orchestrator | INFO     |   - After: {1: 87, 0: 87}
+2025-12-19 12:52:57,302 | pipeline_orchestrator | INFO     | [OK] Data saved to data_prepared/
+2025-12-19 12:52:57,302 | pipeline_orchestrator | INFO     |   - train.csv, val.csv, test.csv, full.csv
+2025-12-19 12:52:57,304 | pipeline_orchestrator | INFO     | 
+2025-12-19 12:52:57,304 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:52:57,304 | pipeline_orchestrator | INFO     | STEP 3: TRAINING AND EVALUATING (K-SHOT LEARNING)
+2025-12-19 12:52:57,304 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:52:57,305 | pipeline_orchestrator | INFO     | Running experiments with command:
+2025-12-19 12:52:57,305 | pipeline_orchestrator | INFO     |   python run_experiments.py --data-path data_prepared\full.csv --k-shots 0 2 4 8 --strategies full last_layer
+2025-12-19 12:52:57,305 | pipeline_orchestrator | INFO     | 
+2025-12-19 12:57:52,483 | pipeline_orchestrator | INFO     | [OK] Training and evaluation completed successfully
+2025-12-19 12:57:52,483 | pipeline_orchestrator | INFO     | 
+2025-12-19 12:57:52,484 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:57:52,484 | pipeline_orchestrator | INFO     | STEP 4: GENERATING SUMMARY REPORT
+2025-12-19 12:57:52,484 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:57:52,485 | pipeline_orchestrator | INFO     | Found latest results: experiment_20251219_125306
+2025-12-19 12:57:52,508 | pipeline_orchestrator | INFO     | [OK] Summary report saved to results\experiment_20251219_125306\SUMMARY.txt
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | 
+KEY FINDINGS:
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | --------------------------------------------------------------------------------
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | 
+================================================================================
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | PIPELINE SUMMARY
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | [INFO] - No data from API, using synthetic Fetch DrugCombDB API Data
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | [OK] Data Preparation
+2025-12-19 12:57:52,509 | pipeline_orchestrator | INFO     | [OK] Training & Evaluation
+2025-12-19 12:57:52,511 | pipeline_orchestrator | INFO     | [OK] Report Generation
+2025-12-19 12:57:52,511 | pipeline_orchestrator | INFO     | 
+Total time: 0:13:33.237948
+2025-12-19 12:57:52,511 | pipeline_orchestrator | INFO     | ================================================================================
+

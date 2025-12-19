@@ -1,0 +1,21 @@
+================================================================================
+CANCERGPT EXPERIMENT SUMMARY REPORT
+================================================================================
+
+Experiment: experiment_20251219_125306
+Generated: 2025-12-19T12:57:52.508605
+
+CONFIGURATION
+--------------------------------------------------------------------------------
+  data_path: data_prepared\full.csv
+  output_dir: results
+  k_shots: [0, 2, 4, 8]
+  rare_tissues: ['pancreas', 'endometrium', 'liver', 'soft tissue', 'stomach', 'urinary tract', 'bone']
+  fine_tuning_strategies: ['full', 'last_layer']
+  run_pretraining: False
+  compare_baselines: True
+  save_checkpoints: True
+  timestamp: 20251219_125306
+
+
+================================================================================
