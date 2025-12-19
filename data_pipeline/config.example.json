@@ -1,0 +1,145 @@
+{
+  "cancergpt_pipeline": {
+    "description": "Configuration file for CancerGPT pipeline with Ollama integration",
+    
+    "api": {
+      "drugcombdb": {
+        "base_url": "http://drugcombdb.denglab.org:8888",
+        "page_size": 200,
+        "max_pages": 6000,
+        "timeout": 30,
+        "max_retries": 5,
+        "concurrency": 40
+      }
+    },
+    
+    "ollama": {
+      "enabled": true,
+      "base_url": "http://localhost:11434",
+      "model": "llama2:latest",
+      "timeout": 120,
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "num_predict": 200,
+      "retry_attempts": 3,
+      "notes": "Change model to 'llama3.1:latest' when available"
+    },
+    
+    "processing": {
+      "synergy_threshold": 5.0,
+      "min_tissue_size": 200,
+      "test_split_size": 0.2,
+      "random_state": 42,
+      "allowed_tissues": ["breast", "lung", "colon", "prostate"]
+    },
+    
+    "templates": {
+      "static_count": 50,
+      "ollama_count": 80,
+      "total_target": 130,
+      "validation": {
+        "min_length": 20,
+        "required_fields": ["drugA", "drugB", "cell_line", "tissue"],
+        "require_yes_no_question": true
+      }
+    },
+    
+    "output": {
+      "directory": "cancergpt_filtered_outputs",
+      "files": {
+        "raw": "raw.parquet",
+        "clean": "clean.parquet",
+        "labeled": "labeled.parquet",
+        "split": "split.parquet",
+        "templates": "prompt_templates.jsonl",
+        "ollama_templates": "ollama_templates.jsonl",
+        "dataset_jsonl": "dataset.jsonl",
+        "dataset_csv": "dataset.csv",
+        "pipeline_log": "pipeline.log"
+      },
+      "formats": ["parquet", "jsonl", "csv"],
+      "compression": "gzip"
+    },
+    
+    "logging": {
+      "level": "INFO",
+      "format": "%(asctime)s | %(name)-12s | %(levelname)-8s | %(message)s",
+      "to_file": true,
+      "to_console": true
+    },
+    
+    "performance": {
+      "notes": {
+        "ingestion_time_hours": "2-4 (async, 6000 pages)",
+        "cleaning_minutes": "2-5",
+        "labeling_seconds": "<1",
+        "splitting_seconds": "<1",
+        "templates_static_seconds": "<1",
+        "templates_ollama_minutes": "10-15"
+      },
+      "memory_requirements": "4-8 GB RAM",
+      "disk_space_gb": "5-10"
+    },
+    
+    "execution_profiles": {
+      "quick_test": {
+        "description": "Fast testing without Ollama",
+        "max_pages": 100,
+        "ollama_enabled": false,
+        "static_templates": 10,
+        "expected_time": "5-10 minutes"
+      },
+      
+      "with_ollama": {
+        "description": "Full pipeline with Ollama-generated templates",
+        "max_pages": 6000,
+        "ollama_enabled": true,
+        "ollama_count": 80,
+        "expected_time": "3-5 hours total"
+      },
+      
+      "high_threshold": {
+        "description": "Conservative synergy threshold (6.5)",
+        "synergy_threshold": 6.5,
+        "expected_synergistic_percent": "5-7%"
+      },
+      
+      "templates_only": {
+        "description": "Generate templates without data pipeline",
+        "skip_ingestion": true,
+        "skip_processing": true,
+        "skip_serialization": true,
+        "templates_only": true
+      }
+    },
+    
+    "quality_checks": {
+      "validate_templates": true,
+      "check_duplicates": true,
+      "verify_splits": true,
+      "test_sample_prompts": true
+    },
+    
+    "advanced": {
+      "tissue_normalization": {
+        "breast": ["breast"],
+        "lung": ["lung"],
+        "colon": ["colon", "colorectal"],
+        "prostate": ["prostate"]
+      },
+      
+      "few_shot": {
+        "enabled": true,
+        "examples_per_template": 3,
+        "balance_classes": true
+      },
+      
+      "template_strategies": [
+        "static_generation",
+        "ollama_generation",
+        "few_shot_variants",
+        "domain_specific"
+      ]
+    }
+  }
+}

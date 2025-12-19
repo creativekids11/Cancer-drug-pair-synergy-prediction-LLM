@@ -1,0 +1,23 @@
+2025-12-19 11:33:26,990 | pipeline_orchestrator | INFO     | Pipeline initialized with output directory: .
+2025-12-19 11:33:26,990 | pipeline_orchestrator | INFO     | 
+================================================================================
+2025-12-19 11:33:26,990 | pipeline_orchestrator | INFO     | CANCERGPT COMPLETE PIPELINE
+2025-12-19 11:33:26,990 | pipeline_orchestrator | INFO     | ================================================================================
+
+2025-12-19 11:33:26,990 | pipeline_orchestrator | INFO     | 
+2025-12-19 11:33:26,990 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | STEP 1: GENERATING SYNTHETIC DATA
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | Data already exists at sample_data.csv, skipping generation.
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | 
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | STEP 2: PREPARING AND SPLITTING DATA
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | Prepared data already exists, skipping preparation.
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | 
+2025-12-19 11:33:26,991 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 11:33:26,992 | pipeline_orchestrator | INFO     | STEP 3: TRAINING AND EVALUATING (K-SHOT LEARNING)
+2025-12-19 11:33:26,992 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 11:33:26,992 | pipeline_orchestrator | INFO     | Running experiments with command:
+2025-12-19 11:33:26,992 | pipeline_orchestrator | INFO     |   python run_experiments.py --data-path data_prepared\full.csv --k-shots 0 2 --skip-baselines --rare-tissues pancreas --strategies full last_layer
+2025-12-19 11:33:26,992 | pipeline_orchestrator | INFO     | 

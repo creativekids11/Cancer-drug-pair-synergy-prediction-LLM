@@ -1,0 +1,29 @@
+{
+  "total_samples": 1000,
+  "unique_tissues": 17,
+  "unique_drugs_A": 30,
+  "unique_drugs_B": 30,
+  "class_distribution": {
+    "0": 872,
+    "1": 128
+  },
+  "samples_by_tissue": {
+    "liver": 72,
+    "breast": 69,
+    "soft tissue": 66,
+    "esophageal": 66,
+    "prostate": 62,
+    "melanoma": 62,
+    "endometrium": 61,
+    "stomach": 61,
+    "urinary tract": 60,
+    "head and neck": 59,
+    "ovarian": 58,
+    "gastric": 58,
+    "pancreas": 54,
+    "colorectal": 51,
+    "bone": 48,
+    "renal": 47,
+    "lung": 46
+  }
+}

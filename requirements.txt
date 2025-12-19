@@ -1,0 +1,51 @@
+# CancerGPT Requirements
+# 
+# Install with: pip install -r requirements.txt
+#
+# Last updated: 2024
+
+# Core ML/DL frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Transformers and NLP
+transformers>=4.30.0
+tokenizers>=0.13.0
+
+# Data processing
+pandas>=1.5.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Machine Learning
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Utilities
+tqdm>=4.65.0
+joblib>=1.3.0
+pyyaml>=6.0
+
+# Optional: GPU acceleration (adjust based on your setup)
+# For CUDA 11.8:
+# torch>=2.0.0+cu118
+# 
+# For CUDA 12.1:
+# torch>=2.0.0+cu121
+# 
+# For CPU only (no GPU):
+# Remove torch line above and use: torch-cpu
+
+# Optional: For better performance
+# pip install --upgrade pip setuptools wheel
+
+# Development (optional)
+# pytest>=7.4.0
+# black>=23.7.0
+# pylint>=2.17.0
+# mypy>=1.4.0
