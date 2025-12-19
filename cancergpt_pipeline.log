@@ -35,3 +35,22 @@
 2025-12-19 12:43:21,341 | pipeline_orchestrator | INFO     | Running experiments with command:
 2025-12-19 12:43:21,341 | pipeline_orchestrator | INFO     |   python run_experiments.py --data-path data_prepared\full.csv --k-shots 0 2 4 8 --strategies full last_layer
 2025-12-19 12:43:21,342 | pipeline_orchestrator | INFO     | 
+2025-12-19 12:44:19,270 | pipeline_orchestrator | INFO     | Pipeline initialized with output directory: .
+2025-12-19 12:44:19,270 | pipeline_orchestrator | INFO     | 
+================================================================================
+2025-12-19 12:44:19,270 | pipeline_orchestrator | INFO     | CANCERGPT COMPLETE PIPELINE - DRUGCOMBDB INTEGRATION
+2025-12-19 12:44:19,271 | pipeline_orchestrator | INFO     | ================================================================================
+
+2025-12-19 12:44:19,271 | pipeline_orchestrator | INFO     | 
+*** STEP 0: DRUGCOMBDB API FETCH (PRIMARY DATA SOURCE) ***
+
+2025-12-19 12:44:19,271 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:44:19,271 | pipeline_orchestrator | INFO     | STEP 0: FETCHING DATA FROM DRUGCOMBDB (http://drugcombdb.denglab.org)
+2025-12-19 12:44:19,271 | pipeline_orchestrator | INFO     | ================================================================================
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     | API Configuration:
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Base URL: http://drugcombdb.denglab.org:8888
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Page size: 500 records/page
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Max pages: 6000 (total ~3000000 records)
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Concurrency: 10 parallel requests
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     |   - Timeout: 60s per request
+2025-12-19 12:44:19,930 | pipeline_orchestrator | INFO     | Starting data fetch from DrugCombDB (this may take several minutes)...
